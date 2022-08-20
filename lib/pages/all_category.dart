@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/pages/category+product.dart';
 import 'package:store/services/apiServices.dart';
 
 class AllCategory extends StatelessWidget {
@@ -20,7 +21,9 @@ class AllCategory extends StatelessWidget {
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: (){},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryProductPage(snapshot.data[index])));
+                    },
                     child: Card(
                       elevation: 2,
                       margin: EdgeInsets.all(15),
@@ -30,7 +33,10 @@ class AllCategory extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(40),
                         child: Center(
-                          child: Text(snapshot.data[index].toString().toUpperCase(),style: TextStyle(fontSize: 20),),
+                          child: Text(
+                            snapshot.data[index].toString().toUpperCase(),
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
                       ),
                     ),
