@@ -21,19 +21,29 @@ class ApiService {
 
   Future getAllCategories() async {
     final AllCategories =
-    Uri.parse("https://fakestoreapi.com/products/categories");
+        Uri.parse("https://fakestoreapi.com/products/categories");
     final response = await http.get(AllCategories);
     //print(response.statusCode);
     //print(response.body);
-    print(response.body);
+    //  print(response.body);
     return jsonDecode(response.body);
   }
 
   Future getProductById(String catName) async {
-    final ProductByIdUrl = Uri.parse("https://fakestoreapi.com/products/$catName");
+    final ProductByIdUrl =
+        Uri.parse("https://fakestoreapi.com/products/category/$catName");
     final response = await http.get(ProductByIdUrl);
     //print(response.statusCode);
-    //print(response.body);
+    print(response.body);
+    return jsonDecode(response.body);
+  }
+
+  Future getCart(String UserId) async {
+    final fetchCardProducts =
+        Uri.parse("https://fakestoreapi.com/carts/$UserId");
+    final response = await http.get(fetchCardProducts);
+    //print(response.statusCode);
+    print(response.body);
     return jsonDecode(response.body);
   }
 }

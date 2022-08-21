@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/pages/all_category.dart';
+import 'package:store/pages/cart_screen.dart';
 import 'package:store/pages/productdetail.dart';
 import 'package:store/services/apiServices.dart';
 
@@ -14,9 +15,20 @@ class Home extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.redAccent,
-        actions: [IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>AllCategory()));
-        }, icon: Icon(Icons.view_list))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AllCategory()));
+              },
+              icon: Icon(Icons.view_list)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CartScreen()));
+              },
+              icon: Icon(Icons.shopping_cart))
+        ],
       ),
       body: FutureBuilder(
         future: ApiService().getAllPosts(),
@@ -27,10 +39,8 @@ class Home extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return Card(
-
                   elevation: 5,
                   child: ListTile(
-
                     title: Text(snapshot.data[index]['title']),
                     leading: Image.network(
                       snapshot.data[index]['image'],
@@ -39,8 +49,12 @@ class Home extends StatelessWidget {
                     ),
                     subtitle: Text(
                         "Price- Rs" + snapshot.data[index]['price'].toString()),
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductDetail(snapshot.data[index]['id'])));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductDetail(snapshot.data[index]['id'])));
                     },
                   ),
                 );
