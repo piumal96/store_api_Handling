@@ -43,7 +43,7 @@ class ApiService {
         Uri.parse("https://fakestoreapi.com/carts/$UserId");
     final response = await http.get(fetchCardProducts);
     //print(response.statusCode);
-    print(response.body);
+   // print(response.body);
     return jsonDecode(response.body);
   }
 }
